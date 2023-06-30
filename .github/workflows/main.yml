@@ -1,5 +1,7 @@
 name: Build and deploy main branch
 on: [push]
+permissions:
+    packages: write
 jobs:
     build:
         runs-on: ubuntu-latest
