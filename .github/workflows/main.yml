@@ -16,3 +16,12 @@ jobs:
                 password: ${{ secrets.GITHUB_TOKEN }}
             - name: Build and push image
               run: "./build.sh"
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v3
+            - name: Deploy image to Metal server
+              env:
+                DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+              run: "./deploy.sh"
