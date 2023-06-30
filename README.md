@@ -8,6 +8,10 @@ The intent of this demo is to explore what a minimal migration path to Equinix M
 might look like for the developer of an existing containerized application that is built
 and deployed to the public cloud using industry-standard CI/CD and IaC tooling.
 
+## See it in Action!
+
+Visit http://147.75.50.79/
+
 ## Requirements
 
 * Metal API Token
@@ -29,10 +33,21 @@ $ METAL_AUTH_TOKEN=[auth_token] terraform apply
 ```
 
 Applying the plan provisions the Metal infrastructure, and also produces the following
-resources needed for deployment:
+resources needed for deployment, which are configured as repository-level secrets/variables
+for Github Actions:
 
-* Generated SSH private key, written to `~/.ssh/equinix-metal-terraform-rsa`.
-* Metal server public IP address, written as the `server_public_ip` plan output.
+* `DEPLOY_SSH_PRIVATE_KEY` - Generated SSH private key, written to
+  `~/.ssh/equinix-metal-terraform-rsa`.
+* `EQX_METAL_SERVER_IP` - Metal server public IP address, written as the
+  `server_public_ip` plan output.
+* `EQX_METAL_SERVER_IP` - Metal server public SSH key; connect via SSH using the
+  above key/IP address and then pull from `~/.ssh/known_hosts`.
+
+The Metal infrastructure is created in the "Alex Sandbox" project in the
+"Equinix Metal Billing Org" organization.
+
+***NOTE:*** If you recreate the Metal infrastructure, be sure to update the
+repository secrets and environment variables mentioned above.
 
 ## Build
 
@@ -88,6 +103,12 @@ that allows state to be accessed remotely. Options include:
 * If we want Equinix-hosted state storage, consider running
   [MinIO on Metal](https://deploy.equinix.com/developers/guides/minio-terraform/) and
   using the `s3` backend.
+
+### OIDC
+
+Once we have the Terraform plan running in Github Actions, look at
+[OpenID Connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
+avoid storing a long-lived API token in the project config.
 
 ### Compute Cluster
 
