@@ -22,6 +22,10 @@ jobs:
         steps:
             - name: Check out repository
               uses: actions/checkout@v3
+            - name: Add Metal server public key to known_hosts
+              run: |
+                echo "${{ vars.EQX_METAL_SERVER_SSH_PUBLIC_KEY }}" > ~/.ssh/known_hosts
+                chmod 600 ~/.ssh/known_hosts
             - name: Deploy image to Metal server
               env:
                 DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
