@@ -24,4 +24,5 @@ jobs:
             - name: Deploy image to Metal server
               env:
                 DEPLOY_SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+                EQX_METAL_SERVER_IP: ${{ vars.EQX_METAL_SERVER_IP }}
               run: "./deploy.sh"
