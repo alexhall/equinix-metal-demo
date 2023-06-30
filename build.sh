@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z "$IMAGE_TAG" ]]; then
-  IMAGE_TAG=$(git rev-parse LATEST)
+  IMAGE_TAG=$(git rev-parse HEAD)
 fi
 
 docker build \
