@@ -27,4 +27,3 @@ IMAGES=\$(docker ps -aq)
 if [[ -n "\$IMAGES" ]]; then docker rm -f \$IMAGES; fi
 docker run -dit --name equinix-metal-demo-app -p 80:80 ghcr.io/alexhall/equinix-metal-demo:$IMAGE_TAG
 EOF
- 
