@@ -89,6 +89,12 @@ that allows state to be accessed remotely. Options include:
   [MinIO on Metal](https://deploy.equinix.com/developers/guides/minio-terraform/) and
   using the `s3` backend.
 
+### OIDC
+
+Once we have the Terraform plan running in Github Actions, look at
+[OpenID Connect](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect)
+avoid storing a long-lived API token in the project config.
+
 ### Compute Cluster
 
 For running containerized applications with production workloads, we generally want
