@@ -17,6 +17,7 @@ jobs:
             - name: Build and push image
               run: "./build.sh"
     deploy:
+        needs: build
         runs-on: ubuntu-latest
         steps:
             - name: Check out repository
